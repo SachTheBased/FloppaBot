@@ -85,7 +85,7 @@ async def api_call(path, method="GET", **kwargs):
     """Return the JSON body of a call to Discord REST API."""
     defaults = {
         "headers": {
-            "Authorization": f"Bot OTE3OTY2Mjg1NjQyNTQ3MjQx.YbAYuQ.arUZ6tQ9Wb_Z5t0WKNLeU5jVjRc",
+            "Authorization": f"Bot ",
             "User-Agent": "dBot "
         }
     }
@@ -94,16 +94,6 @@ async def api_call(path, method="GET", **kwargs):
         async with aiohttp.ClientSession.request(method, path, **kwargs) as response:
             assert 200 == response.status, response.reason
             return await response.json()
-
-
-##############################################################
-def last_monday():
-    today = datetime.date.today()
-    monday = today - datetime.timedelta(days=today.weekday())
-    return monday
-
-
-##############################################################
 
 
 # Start of Purge
